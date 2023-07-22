@@ -22,8 +22,6 @@ def perform_iteration():
         pile += 1
         result_label.config(text=f"Temps : {cooldConvert(time.time() - startTime)}")
         if pile == console:
-            result_label.config(text=f"Pile > {console:,}\nTemps: {str(datetime.timedelta(seconds=int(round(time.time() - startTime))))}\n3/4 : {npile:,}")
-            modify_button.pack(pady=10)  # Afficher le bouton "Modifier console"
             info_label.after_cancel(iteration_task)
             conn = sqlite3.connect("result.db")
             cursor = conn.cursor()
@@ -31,8 +29,7 @@ def perform_iteration():
             conn.commit()
             conn.close()
             console += 1
-            stop_iterations()
-            return
+            objectif.config(text=f"Objectif : {console:,}")
         if pile > maxpile:
             maxpile = pile
         if pile > console / 4 * 3:
@@ -43,8 +40,6 @@ def perform_iteration():
         face += 1
         result_label.config(text=f"Temps : {cooldConvert(time.time() - startTime)}")
         if face == console:
-            result_label.config(text=f"Face > {console:,}\nTemps: {str(datetime.timedelta(seconds=int(round(time.time() - startTime))))}\n3/4 : {nface:,}")
-            modify_button.pack(pady=10)  # Afficher le bouton "Modifier console"
             info_label.after_cancel(iteration_task)
             conn = sqlite3.connect("result.db")
             cursor = conn.cursor()
@@ -52,8 +47,7 @@ def perform_iteration():
             conn.commit()
             conn.close()
             console += 1
-            stop_iterations()
-            return
+            objectif.config(text=f"Objectif : {console:,}")
         if face > maxface:
             maxface = face
         if face > console / 4 * 3:
