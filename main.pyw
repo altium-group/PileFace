@@ -24,6 +24,11 @@ def perform_iteration():
             result_label.config(text=f"Pile > {console:,}\nTemps: {str(datetime.timedelta(seconds=int(round(time.time() - startTime))))}\n3/4 : {npile:,}")
             modify_button.pack(pady=10)  # Afficher le bouton "Modifier console"
             info_label.after_cancel(iteration_task)
+            conn = sqlite3.connect("result.db")
+            cursor = conn.cursor()
+            cursor.execute("INSERT INTO results (type, time, quarter, console) VALUES (0, ?, ?, ?)", (time.time() - startTime, npile, console))
+            conn.commit()
+            conn.close()
             console += 1
             stop_iterations()
             return
@@ -40,6 +45,11 @@ def perform_iteration():
             result_label.config(text=f"Face > {console:,}\nTemps: {str(datetime.timedelta(seconds=int(round(time.time() - startTime))))}\n3/4 : {nface:,}")
             modify_button.pack(pady=10)  # Afficher le bouton "Modifier console"
             info_label.after_cancel(iteration_task)
+            conn = sqlite3.connect("result.db")
+            cursor = conn.cursor()
+            cursor.execute("INSERT INTO results (type, time, quarter, console) VALUES (1, ?, ?, ?)", (time.time() - startTime, nface, console))
+            conn.commit()
+            conn.close()
             console += 1
             stop_iterations()
             return
