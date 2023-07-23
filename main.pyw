@@ -86,7 +86,7 @@ def stop_iterations():
 
 # Demander à l'utilisateur la valeur de 'console'
 root = tk.Tk()
-root.withdraw()  # Cacher la fenêtre principale pour afficher uniquement la boîte de dialogue
+root.withdraw()
 console = simpledialog.askinteger("Valeur de 'console'", "Entrez la valeur de 'console':", initialvalue=5)
 root.destroy()  # Fermer la fenêtre principale après avoir obtenu la valeur de 'console'
 
@@ -94,6 +94,9 @@ root.destroy()  # Fermer la fenêtre principale après avoir obtenu la valeur de
 root = tk.Tk()
 root.title("Simulateur")
 root.geometry("350x330")
+root.minsize(350, 330)
+root.maxsize(350, 330)
+root.iconbitmap("dice.ico")
 
 objectif = tk.Label(root, text="", font=("Consolas", 12))
 objectif.pack(pady=10)
